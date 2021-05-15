@@ -30,6 +30,9 @@ namespace PCConf
                 options.UseSqlServer(Configuration.GetConnectionString("Default"));
             });
 
+            // connect vue app - middleware  
+            services.AddSpaStaticFiles(options => options.RootPath = "client-app/dist");
+
             services.AddScoped<IProcessorRepository, ProcessorRepository>();
             services.AddScoped<IMotherBoardRepository, MotherBoardRepository>();
             services.AddScoped<IRamRepository, RamRepository>();
@@ -59,6 +62,18 @@ namespace PCConf
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            // use middleware and launch server for Vue  
+            app.UseSpaStaticFiles();
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "client-app";
+                if (env.IsDevelopment())
+                {
+
+                    spa.UseVueDevelopmentServer();
+                }
             });
 
             DbSeeder.CreateDbAndSampleData(app.ApplicationServices);
