@@ -3,7 +3,7 @@ using PCConf.Domain.Services;
 using System;
 using System.Threading.Tasks;
 
-namespace PCConf.Controllers
+namespace PCConf.RestApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

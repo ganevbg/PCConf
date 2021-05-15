@@ -17,13 +17,13 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "PCConf": {
+    "PCConf.RestApi": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "http://localhost:56090/",
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "pcconfigurator"
+        "ASPNETCORE_ENVIRONMENT": "PCConf.RestApiigurator"
       }
     }
   }

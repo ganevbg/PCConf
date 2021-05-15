@@ -11,7 +11,7 @@ using PCConf.Domain.Services;
 using PCConf.Repositories;
 using PCConf.Services;
 
-namespace PCConf
+namespace PCConf.RestApi
 {
     public class Startup
     {
