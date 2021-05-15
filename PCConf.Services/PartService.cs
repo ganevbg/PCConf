@@ -39,14 +39,14 @@
             return await _processorRepository.Search();
         }
 
-        public async Task<IEnumerable<MotherBoard>> GetMotherBoardsByCpuSocketAsync(string socket)
+        public async Task<IEnumerable<MotherBoard>> GetMotherBoardsByCpuSocketAsync(Guid cpuId)
         {
-            return await _motherBoardRepository.GetMotherBoardsByCpuSocketAsync(socket);
+            return await _motherBoardRepository.GetMotherBoardsByCpuSocketAsync(cpuId);
         }
 
-        public async Task<IEnumerable<Ram>> GetRamsByTypeAsync(string type)
+        public async Task<IEnumerable<Ram>> GetRamsByTypeAsync(Guid mbId)
         {
-            return await _ramRepository.GetRamsByType(type);
+            return await _ramRepository.GetRamsByType(mbId);
         }
 
         public async Task<IEnumerable<VideoCard>> GetVideoCardsAsync()
@@ -57,6 +57,12 @@
         public async Task<IEnumerable<PcCase>> GetCaseByMotherBoardAndVideCardAsync(Guid motherBoardId, Guid videCardId)
         {
             return await _caseRepository.GetCaseByMotherBoardAndVideCard(motherBoardId, videCardId);
+        }
+
+
+        public async Task<IEnumerable<PcCase>> GetAllMotherBoards()
+        {
+            return await _caseRepository.Search();
         }
 
         public async Task<IEnumerable<PowerSuply>> GetPowerSupliesAsync()

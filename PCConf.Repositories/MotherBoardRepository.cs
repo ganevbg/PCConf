@@ -37,11 +37,20 @@
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<MotherBoard>> GetMotherBoardsByCpuSocketAsync(string socket)
+        public async Task<IEnumerable<MotherBoard>> GetMotherBoardsByCpuSocketAsync(Guid cpuId)
         {
+            var cpu = _appContext.Processors
+                .Include(c => c.CpuSocket).ToList()
+                .Find(x => x.Id.Equals(cpuId));
+
+            if (cpu == null)
+            {
+                return null;
+            }
+
             return await _appContext.MotherBoards
                 .IncludeAll()
-                .Where(item => item.CpuSocket.Name.ToLower().Equals(socket.ToLower()))
+                .Where(item => item.CpuSocket.Equals(cpu.CpuSocket))
                 .ToListAsync();
         }
 

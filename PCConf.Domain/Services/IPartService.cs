@@ -9,9 +9,9 @@
     {
         Task<IEnumerable<Processor>> GetAllProcessorsAsync();
 
-        Task<IEnumerable<MotherBoard>> GetMotherBoardsByCpuSocketAsync(string socket);
+        Task<IEnumerable<MotherBoard>> GetMotherBoardsByCpuSocketAsync(Guid cpuId);
 
-        Task<IEnumerable<Ram>> GetRamsByTypeAsync(string type);
+        Task<IEnumerable<Ram>> GetRamsByTypeAsync(Guid mbId);
 
         Task<IEnumerable<VideoCard>> GetVideoCardsAsync();
 
@@ -20,5 +20,7 @@
         Task<IEnumerable<PowerSuply>> GetPowerSupliesAsync();
 
         Task<IEnumerable<StorageDrive>> GetDrivesAsync();
+
+        Task<IEnumerable<PcCase>> GetAllMotherBoards();
     }
 }

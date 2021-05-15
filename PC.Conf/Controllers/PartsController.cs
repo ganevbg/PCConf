@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PCConf.Domain.Services;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PCConf.RestApi.Controllers
@@ -24,17 +25,17 @@ namespace PCConf.RestApi.Controllers
         }
 
         [HttpGet]
-        [Route("GetMotherBoards/{socket}")]
-        public async Task<IActionResult> GetMotherBoards(string socket)
+        [Route("GetMotherBoards/{cpuId}")]
+        public async Task<IActionResult> GetMotherBoards(Guid cpuId)
         {
-            return Ok(await _partService.GetMotherBoardsByCpuSocketAsync(socket));
+            return Ok(await _partService.GetMotherBoardsByCpuSocketAsync(cpuId));
         }
 
         [HttpGet]
-        [Route("GetRams/{type}")]
-        public async Task<IActionResult> GetRams(string type)
+        [Route("GetRams/{mbId}")]
+        public async Task<IActionResult> GetRams(Guid mbId)
         {
-            return Ok(await _partService.GetRamsByTypeAsync(type));
+            return Ok(await _partService.GetRamsByTypeAsync(mbId));
         }
 
         [HttpGet]

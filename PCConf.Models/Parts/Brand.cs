@@ -5,5 +5,6 @@
     [Table("Brand")]
     public class Brand : Nomenclature
     {
+        public string Logo { get; set; }
     }
 }

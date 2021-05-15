@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PCConf.Data", "PCConf.Data\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PCConf.Services", "PCConf.Services\PCConf.Services.csproj", "{89AB249A-86A1-4D18-A94C-0C63B56C77F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PCConf.Web", "PCConf.Web\PCConf.Web.csproj", "{2325DCB0-3EED-4866-AA2A-572459CEBF5B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{89AB249A-86A1-4D18-A94C-0C63B56C77F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89AB249A-86A1-4D18-A94C-0C63B56C77F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89AB249A-86A1-4D18-A94C-0C63B56C77F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2325DCB0-3EED-4866-AA2A-572459CEBF5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2325DCB0-3EED-4866-AA2A-572459CEBF5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2325DCB0-3EED-4866-AA2A-572459CEBF5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2325DCB0-3EED-4866-AA2A-572459CEBF5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

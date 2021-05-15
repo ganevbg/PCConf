@@ -30,11 +30,20 @@
             return await _appContext.Rams.FindAsync(id);
         }
 
-        public async Task<IEnumerable<Ram>> GetRamsByType(string type)
+        public async Task<IEnumerable<Ram>> GetRamsByType(Guid mbId)
         {
+            var mb = _appContext.MotherBoards
+                .Include(c => c.RamType).ToList()
+                .Find(x => x.Id.Equals(mbId));
+
+            if (mb == null)
+            {
+                return null;
+            }
+
             return await _appContext.Rams
                 .IncludeAll()
-                .Where(item => item.Type.Name.ToLower().Equals(type.ToLower()))
+                .Where(item => item.Type.Equals(mb.RamType))
                 .ToListAsync();
         }
 

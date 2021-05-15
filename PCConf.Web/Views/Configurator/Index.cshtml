@@ -1,0 +1,252 @@
+﻿<div class="container">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            @Html.Label("Processor")
+            @(Html.Kendo().DropDownList()
+                .HtmlAttributes(new { @class = "form-control" })
+                .OptionLabel("Choose")
+                .Name("processors")
+                .DataValueField("id")
+                .DataTextField("model")
+                .OptionLabelTemplate("Choose")
+                .TemplateId("dropDownTempalteId")
+                .ValueTemplateId("dropDownTempalteId")
+                .DataSource(d => d.Read(r => r.Url("http://localhost:56090/api/Parts/GetProcessors"))))
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.Label("Motherborad")
+            @(Html.Kendo().DropDownList()
+                .HtmlAttributes(new { @class = "form-control" })
+                .OptionLabel("Choose")
+                .Name("motherborads")
+                .DataValueField("id")
+                .DataTextField("model")
+                .CascadeFrom("processors")
+                .CascadeFromField("id")
+                .OptionLabelTemplate("Choose")
+                .TemplateId("dropDownTempalteId")
+                .ValueTemplateId("dropDownTempalteId")
+                .DataSource(d => d.Read(r => r.Action("GetMotherBoards", "Configurator").Data("filterData")).ServerFiltering(true)))
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            @Html.Label("RAM")
+            @(Html.Kendo().DropDownList()
+                .HtmlAttributes(new { @class = "form-control" })
+                .OptionLabel("Choose")
+                .Name("rams")
+                .DataValueField("id")
+                .DataTextField("model")
+                .CascadeFrom("motherborads")
+                .CascadeFromField("id")
+                .OptionLabelTemplate("Choose")
+                .TemplateId("ramTemplateId")
+                .ValueTemplateId("ramTemplateId")
+                .DataSource(d => d.Read(r => r.Action("GetRams", "Configurator").Data("filterData")).ServerFiltering(true)))
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.Label("Video card")
+            @(Html.Kendo().DropDownList()
+                .HtmlAttributes(new { @class = "form-control" })
+                .OptionLabel("Choose")
+                .Name("videocards")
+                .DataValueField("id")
+                .DataTextField("graphicsProcessor")
+                .Events(e => e.Cascade("cascadeCases"))
+                .OptionLabelTemplate("Choose")
+                .TemplateId("gpuTemplateId")
+                .ValueTemplateId("gpuTemplateId")
+                .DataSource(d => d.Read(r => r.Url("http://localhost:56090/api/Parts/GetVideCards"))))
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            @Html.Label("Disk Drive")
+            @(Html.Kendo().DropDownList()
+                .HtmlAttributes(new { @class = "form-control" })
+                .OptionLabel("Choose")
+                .Name("drives")
+                .DataValueField("id")
+                .DataTextField("model")
+                .OptionLabelTemplate("Choose")
+                .TemplateId("dropDownTempalteId")
+                .ValueTemplateId("dropDownTempalteId")
+            .DataSource(d => d.Read(r => r.Url("http://localhost:56090/api/Parts/GetDrives"))))
+        </div>
+
+        <div class="form-group col-md-4">
+            @Html.Label("Case")
+            @(Html.Kendo().DropDownList()
+                .HtmlAttributes(new { @class = "form-control" })
+                .OptionLabel("Choose")
+                .Name("cases")
+                .DataValueField("id")
+                .DataTextField("model")
+                .OptionLabelTemplate("Choose")
+                .TemplateId("dropDownTempalteId")
+                .ValueTemplateId("dropDownTempalteId")
+            .DataSource(d => d.Read(r => r.Action("GetCases", "Configurator"))))
+        </div>
+
+        <div class="form-group col-md-4">
+            @Html.Label("Power suply")
+            @(Html.Kendo().DropDownList()
+                .HtmlAttributes(new { @class = "form-control" })
+                .OptionLabel("Choose")
+                .Name("powersuplies")
+                .DataValueField("id")
+                .DataTextField("model")
+                .OptionLabelTemplate("Choose")
+                .TemplateId("dropDownTempalteId")
+                .ValueTemplateId("dropDownTempalteId")
+            .DataSource(d => d.Read(r => r.Url("http://localhost:56090/api/Parts/GetPowerSuplies"))))
+        </div>
+    </div>
+</div>
+
+
+<script id="dropDownTempalteId" type="text/x-kendo-template">
+
+    <span class="k-state-default" style="display:inline-block;" >
+        <img style="width:30px; height:30px;" src="#: kendo.format('images/{0}', data.brand.logo)#"></img>
+    </span>
+    <span class="k-state-default" style="padding-left: 15px;">
+         #: data.brand.name # #: data.model #   Price: #: kendo.toString(price, "c") #
+    </span>
+</script>
+
+<script id="ramTemplateId" type="text/x-kendo-template">
+    <span class="k-state-default" style="display:inline-block;" >
+        <img style="width:30px; height:30px;" src="#: kendo.format('images/{0}', data.brand.logo)#"></img>
+    </span>
+    <span>
+         #: data.brand.name # #: data.model # #: data.size # GB  Price: #: kendo.toString(price, "c") #
+    </span>
+</script>
+
+<script id="gpuTemplateId" type="text/x-kendo-template">
+    <span class="k-state-default" style="display:inline-block;" >
+        <img style="width:30px; height:30px;" src="#: kendo.format('images/{0}', data.brand.logo)#"></img>
+    </span>
+    <span>
+         #: data.brand.name # #: data.graphicsProcessor # #: data.videoRam # GB  Price: #: kendo.toString(price, "c") #
+    </span>
+</script>
+
+
+
+<script>
+
+    function filterData(e) {
+        var data = {};
+        if (e.filter.filters && e.filter.filters.length > 0) {
+            for (var i = 0; i < e.filter.filters.length; i++) {
+                var fieldName = e.filter.filters[i].field.toUpperCase() === "name".toUpperCase()
+                    || e.filter.filters[i].field.toUpperCase() === "fullname".toUpperCase()
+                    ? "text"
+                    : e.filter.filters[i].field;
+                data[fieldName] = e.filter.filters[i].value;
+            }
+        }
+
+        return data;
+    };
+
+    function cascadeCases() {
+
+        var mbDropDown = $("#motherborads").data("kendoDropDownList");
+        var vcDropDown = $("#videocards").data("kendoDropDownList");
+        var casesDropDown = $("#cases").data("kendoDropDownList");
+
+        if (mbDropDown.value() && vcDropDown.value()) {
+            casesDropDown.enable(true);
+
+            requestOptional(
+                "GetCases",
+                "Configurator",
+                {
+                    data: {
+                        mbId: mbDropDown.value(),
+                        gpuId: vcDropDown.value()
+                    },
+                    success: function (data) {
+                        if (!data) {
+                            return;
+                        }
+
+                        casesDropDown.setDataSource(new kendo.data.DataSource({
+                            data
+                        }));
+                    }
+                });
+
+        } else {
+            casesDropDown.value("");
+            casesDropDown.enable(false);
+        }
+    }
+
+    function requestOptional(action, controller, optional) {
+
+        if (optional === null) {
+            optional = {};
+        }
+
+        var isPost = typeof optional.type !== 'undefined' && optional.type !== null && ["POST", "DELETE"].indexOf(optional.type.toUpperCase()) > -1;
+        var ajaxSettings = {
+            data: isPost
+                ? JSON.stringify(optional.data)
+                : optional.data,
+            contentType: optional.contentType ? optional.contentType : "application/json; charset=utf-8",
+            headers: isPost
+                ? { "__RequestVerificationToken": $("input[name='__RequestVerificationToken']:first").val() }
+                : null, // Add __RequestVerificationToken for POST ajax request
+            success: function (d, e, t) {
+                if (optional.success) {
+                    optional.success(d, e, t);
+                }
+            },
+            error: function (d, e, t) {
+                if (optional.error) {
+                    optional.error(d, e, t);
+                }
+            },
+            complete: function (d, e) {
+                if (optional.complete) {
+                    optional.complete(d, e);
+                }
+            },
+            async: (typeof optional.async === "undefined" || optional.async === null) ? true : optional.async,
+            type: optional.type || "GET",
+            traditional: optional.traditional === true,
+            global: (typeof optional.global === "undefined" || optional.global === null) ? true : optional.global,
+            cache: optional.cache
+        };
+
+        return $.ajax(
+            getPathToActionMethod(
+                action,
+                controller,
+                {
+                    area: optional.area,
+                    useArea: optional.useArea
+                }),
+            ajaxSettings
+        );
+
+        function getPathToActionMethod(action, controller, area, useArea) {
+            area = !area || area.length === 0 ? ControllerArea : area;
+            if ((!useArea == undefined || useArea === true) && area) {
+                return "/" + area + "/" + controller + "/" + action + "/";
+            }
+
+            return controller + "/" + action + "/";
+        };
+    }
+
+</script>

@@ -32,47 +32,58 @@
                     {
                         new Brand
                         {
-                            Name = "Intel"
+                            Name = "Intel",
+                            Logo = "intel.svg"
                         },
                         new Brand
                         {
-                            Name = "AMD"
+                            Name = "AMD",
+                            Logo = "amd.svg"
                         },
                         new Brand
                         {
-                            Name = "ASRock"
+                            Name = "ASRock",
+                            Logo = "asrock.svg"
                         },
                         new Brand
                         {
-                            Name = "GIGABYTE"
+                            Name = "GIGABYTE",
+                            Logo = "gigabyte.svg"
                         },
                         new Brand
                         {
-                            Name = "NVidia"
+                            Name = "NVidia",
+                            Logo = "nvidia.svg"
                         },
                         new Brand
                         {
-                            Name = "Kingston"
+                            Name = "Kingston",
+                            Logo = "kingston.svg"
                         },
                         new Brand
                         {
-                            Name = "SATA"
+                            Name = "SATA",
+                            Logo = "sata.svg"
                         },
                         new Brand
                         {
-                            Name = "SeaGate"
+                            Name = "SeaGate",
+                            Logo = "seagate.svg"
                         },
                         new Brand
                         {
-                            Name = "CoolerMaster"
+                            Name = "CoolerMaster",
+                            Logo = "coolermaster.svg"
                         },
                         new Brand
                         {
-                            Name = "nzxt"
+                            Name = "nzxt",
+                            Logo = "nzxt.svg"
                         },
                         new Brand
                         {
-                            Name = "COUGAR"
+                            Name = "COUGAR",
+                            Logo = "cougar.svg"
                         }
                     });
 

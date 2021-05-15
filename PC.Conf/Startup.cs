@@ -15,6 +15,8 @@ namespace PCConf.RestApi
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -47,10 +49,13 @@ namespace PCConf.RestApi
 
             services.AddCors(options =>
             {
-                options.AddPolicy("policy",
+                options.AddPolicy(
+                    MyAllowSpecificOrigins,
                                   builder =>
                                   {
-                                      builder.WithOrigins("http://localhost:8081");
+                                      builder.WithOrigins(
+                                          "http://localhost:44373",
+                                          "https://localhost:44373");
                                   });
             });
         }
@@ -64,6 +69,8 @@ namespace PCConf.RestApi
             }
 
             app.UseRouting();
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthorization();
 
