@@ -28,10 +28,9 @@ namespace PCConf
             services.AddDbContext<AppContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("Default"));
-            });
 
-            // connect vue app - middleware  
-            services.AddSpaStaticFiles(options => options.RootPath = "client-app/dist");
+
+            });
 
             services.AddScoped<IProcessorRepository, ProcessorRepository>();
             services.AddScoped<IMotherBoardRepository, MotherBoardRepository>();
@@ -45,6 +44,15 @@ namespace PCConf
 
             services.AddControllers()
                 .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("policy",
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("http://localhost:8081");
+                                  });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,18 +70,6 @@ namespace PCConf
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-            });
-
-            // use middleware and launch server for Vue  
-            app.UseSpaStaticFiles();
-            app.UseSpa(spa =>
-            {
-                spa.Options.SourcePath = "client-app";
-                if (env.IsDevelopment())
-                {
-
-                    spa.UseVueDevelopmentServer();
-                }
             });
 
             DbSeeder.CreateDbAndSampleData(app.ApplicationServices);
