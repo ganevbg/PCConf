@@ -18,15 +18,22 @@
             _appContext = appContext;
         }
 
-        public async void Delete(Guid id)
+        public void Delete(Guid id)
         {
             _appContext.Processors.Remove(_appContext.Processors.Find(id));
-            await _appContext.SaveChangesAsync();
+            _appContext.SaveChanges();
         }
 
         public async Task<Processor> Get(Guid id)
         {
-            return await _appContext.Processors.FindAsync(id);
+            return await _appContext.Processors
+                .IncludeAll()
+                .FirstOrDefaultAsync(x => x.Id.Equals(id));
+        }
+
+        public async Task<IEnumerable<CpuSocket>> GetGpuSockets()
+        {
+            return await _appContext.CpuSockets.ToListAsync();
         }
 
         public async Task<IEnumerable<Processor>> Search()
@@ -38,7 +45,11 @@
 
         public async Task<Guid> Upsert(Processor model)
         {
-            _appContext.Processors.Add(model);
+            model.Brand = _appContext.Brands.Find(model.Brand.Id);
+            model.CpuSocket = _appContext.CpuSockets.Find(model.CpuSocket.Id);
+            model.RamType = _appContext.RamTypes.Find(model.RamType.Id);
+
+            _appContext.Processors.Update(model);
             await _appContext.SaveChangesAsync();
 
             return model.Id.Value;

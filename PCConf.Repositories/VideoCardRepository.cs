@@ -38,7 +38,11 @@
 
         public async Task<Guid> Upsert(VideoCard model)
         {
-            _appContext.VideoCards.Add(model);
+            model.Brand = _appContext.Brands.Find(model.Brand.Id);
+            model.VideoRamType = _appContext.VideoCardRamTypes.Find(model.VideoRamType.Id);
+            model.Interface = _appContext.VideoCardInterfaces.Find(model.Interface.Id);
+
+            _appContext.VideoCards.Update(model);
             await _appContext.SaveChangesAsync();
 
             return model.Id.Value;

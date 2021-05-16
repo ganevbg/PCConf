@@ -38,7 +38,10 @@
 
         public async Task<Guid> Upsert(StorageDrive model)
         {
-            _appContext.StorageDrives.Add(model);
+            model.Brand = _appContext.Brands.Find(model.Brand.Id);
+            model.Type = _appContext.StorageDriveTypes.Find(model.Type.Id);
+
+            _appContext.StorageDrives.Update(model);
             await _appContext.SaveChangesAsync();
 
             return model.Id.Value;

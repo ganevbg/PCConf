@@ -1,0 +1,102 @@
+﻿@model IEnumerable<PCConf.Models.Parts.Processor>
+
+    @{
+        ViewData["Title"] = "Index";
+    }
+
+    <h1>Index</h1>
+
+    <p>
+        <a asp-action="Upsert">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Model)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhysicalCores)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LogicalCores)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Frequency)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TurboBoostFrequency)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cache)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IntegratedGraphics)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WarrantyPeriod)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ImageUrl)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Model)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhysicalCores)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LogicalCores)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Frequency)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TurboBoostFrequency)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cache)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IntegratedGraphics)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WarrantyPeriod)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ImageUrl)
+                    </td>
+                    <td>
+                        <a asp-action="Upsert" asp-route-id="@item.Id">Edit</a>
+                        <a asp-action="Info" asp-route-id="@item.Id">Details</a>
+
+                        <form asp-action="Delete" asp-route-id="@item.Id" data-ajax="true">
+                            <button type="submit" class="btn btn-sm btn-danger d-none d-md-inline-block">
+                                Delete
+                            </button>
+                        </form>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

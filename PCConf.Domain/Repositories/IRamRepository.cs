@@ -8,5 +8,7 @@
     public interface IRamRepository : ICrudRepository<Ram>
     {
         Task<IEnumerable<Ram>> GetRamsByType(Guid mbId);
+
+        Task<IEnumerable<RamType>> GetRamTypes();
     }
 }

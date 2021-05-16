@@ -41,6 +41,7 @@ namespace PCConf.RestApi
             services.AddScoped<IPowerSuplyRepository, PowerSuplyRepository>();
             services.AddScoped<IPcCaseRepository, PcCaseRepository>();
             services.AddScoped<IStorageDriveRepository, StorageDriveRepository>();
+            services.AddScoped<IBrandRepository, BrandRepository>();
 
             services.AddScoped<IPartService, PartService>();
 

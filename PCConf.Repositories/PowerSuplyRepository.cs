@@ -38,7 +38,10 @@
 
         public async Task<Guid> Upsert(PowerSuply model)
         {
-            _appContext.PowerSuplies.Add(model);
+            model.Brand = _appContext.Brands.Find(model.Brand.Id);
+            model.Certificate = _appContext.Certificates.Find(model.Certificate.Id);
+
+            _appContext.PowerSuplies.Update(model);
             await _appContext.SaveChangesAsync();
 
             return model.Id.Value;

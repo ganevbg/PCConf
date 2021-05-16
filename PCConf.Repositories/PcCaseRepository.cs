@@ -59,7 +59,10 @@
 
         public async Task<Guid> Upsert(PcCase model)
         {
-            _appContext.PcCases.Add(model);
+            model.Brand = _appContext.Brands.Find(model.Brand.Id);
+            model.Formats = _appContext.PcCaseFormat.Where(x => model.Formats.Contains(x));
+
+            _appContext.PcCases.Update(model);
             await _appContext.SaveChangesAsync();
 
             return model.Id.Value;

@@ -47,6 +47,11 @@
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<RamType>> GetRamTypes()
+        {
+            return await _appContext.RamTypes.ToListAsync();
+        }
+
         public async Task<IEnumerable<Ram>> Search()
         {
             return await _appContext.Rams
@@ -56,7 +61,10 @@
 
         public async Task<Guid> Upsert(Ram model)
         {
-            _appContext.Rams.Add(model);
+            model.Brand = _appContext.Brands.Find(model.Brand.Id);
+            model.Type = _appContext.RamTypes.Find(model.Type.Id);
+
+            _appContext.Rams.Update(model);
             await _appContext.SaveChangesAsync();
 
             return model.Id.Value;

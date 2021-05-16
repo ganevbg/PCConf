@@ -57,7 +57,12 @@
 
         public async Task<Guid> Upsert(MotherBoard model)
         {
-            _appContext.MotherBoards.Add(model);
+            model.Brand = _appContext.Brands.Find(model.Brand.Id);
+            model.CpuSocket = _appContext.CpuSockets.Find(model.CpuSocket.Id);
+            model.Format = _appContext.Formats.Find(model.Format.Id);
+            model.RamType = _appContext.RamTypes.Find(model.RamType.Id);
+
+            _appContext.MotherBoards.Update(model);
             await _appContext.SaveChangesAsync();
 
             return model.Id.Value;

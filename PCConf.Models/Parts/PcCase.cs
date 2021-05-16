@@ -6,7 +6,7 @@
     {
         public string Model { get; set; }
 
-        public ICollection<PcCaseFormat> Formats { get; set; }
+        public IEnumerable<PcCaseFormat> Formats { get; set; }
 
         public string SidePanel { get; set; }
 

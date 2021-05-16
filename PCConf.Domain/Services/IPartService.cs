@@ -21,6 +21,10 @@
 
         Task<IEnumerable<StorageDrive>> GetDrivesAsync();
 
-        Task<IEnumerable<PcCase>> GetAllMotherBoards();
+        Task<IEnumerable<Brand>> GetBrandsAsync();
+
+        Task<IEnumerable<CpuSocket>> GetCpuSocketsAsync();
+
+        Task<IEnumerable<RamType>> GetRamTypesAsync();
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PCConf.Domain.Services;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace PCConf.RestApi.Controllers
@@ -16,6 +15,14 @@ namespace PCConf.RestApi.Controllers
         {
             _partService = partService;
         }
+
+        [HttpGet]
+        [Route("GetBrands")]
+        public async Task<IActionResult> GetBrands()
+        {
+            return Ok(await _partService.GetBrandsAsync());
+        }
+
 
         [HttpGet]
         [Route("GetProcessors")]
@@ -65,5 +72,20 @@ namespace PCConf.RestApi.Controllers
         {
             return Ok(await _partService.GetPowerSupliesAsync());
         }
+
+        [HttpGet]
+        [Route("GetCpuSockets")]
+        public async Task<IActionResult> GetCpuSockets()
+        {
+            return Ok(await _partService.GetCpuSocketsAsync());
+        }
+
+        [HttpGet]
+        [Route("GetRamTypes")]
+        public async Task<IActionResult> GetRamTypes()
+        {
+            return Ok(await _partService.GetRamTypesAsync());
+        }
+        
     }
 }

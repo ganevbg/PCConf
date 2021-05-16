@@ -16,6 +16,8 @@
         private readonly IPcCaseRepository _caseRepository;
         private readonly IPowerSuplyRepository _powerSuplyRepository;
         private readonly IStorageDriveRepository _storageDriveRepository;
+        private readonly IBrandRepository _brandRepository;
+
         public PartService(
             IProcessorRepository processorRepository,
             IMotherBoardRepository motherBoardRepository,
@@ -23,7 +25,8 @@
             IVideoCardRepository videoCardRepository,
             IPcCaseRepository caseRepository,
             IPowerSuplyRepository powerSuplyRepository,
-            IStorageDriveRepository storageDriveRepository)
+            IStorageDriveRepository storageDriveRepository,
+            IBrandRepository brandRepository)
         {
             _processorRepository = processorRepository;
             _motherBoardRepository = motherBoardRepository;
@@ -32,6 +35,8 @@
             _caseRepository = caseRepository;
             _powerSuplyRepository = powerSuplyRepository;
             _storageDriveRepository = storageDriveRepository;
+            _brandRepository = brandRepository;
+
         }
 
         public async Task<IEnumerable<Processor>> GetAllProcessorsAsync()
@@ -59,12 +64,6 @@
             return await _caseRepository.GetCaseByMotherBoardAndVideCard(motherBoardId, videCardId);
         }
 
-
-        public async Task<IEnumerable<PcCase>> GetAllMotherBoards()
-        {
-            return await _caseRepository.Search();
-        }
-
         public async Task<IEnumerable<PowerSuply>> GetPowerSupliesAsync()
         {
             return await _powerSuplyRepository.Search();
@@ -73,6 +72,21 @@
         public async Task<IEnumerable<StorageDrive>> GetDrivesAsync()
         {
             return await _storageDriveRepository.Search();
+        }
+
+        public async Task<IEnumerable<Brand>> GetBrandsAsync()
+        {
+            return await _brandRepository.Search();
+        }
+
+        public async Task<IEnumerable<CpuSocket>> GetCpuSocketsAsync()
+        {
+            return await _processorRepository.GetGpuSockets();
+        }
+
+        public async Task<IEnumerable<RamType>> GetRamTypesAsync()
+        {
+            return await _ramRepository.GetRamTypes();
         }
     }
 }

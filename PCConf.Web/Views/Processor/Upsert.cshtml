@@ -1,0 +1,131 @@
+﻿@model PCConf.Models.Parts.Processor
+
+@{
+    ViewData["Title"] = "Upsert";
+}
+
+<h1>Upsert</h1>
+
+<h4>Processor</h4>
+<hr />
+
+
+@using (Html.BeginForm(
+"Upsert",
+"Processor",
+FormMethod.Post))
+{
+
+    <div class="container">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(m => m.Brand)
+                @(Html.Kendo().DropDownListFor(m => m.Brand.Id)
+                    .HtmlAttributes(new { @class = "form-control" })
+                    .OptionLabel("Choose")
+                    .DataValueField("id")
+                    .DataTextField("name")
+                .DataSource(d => d.Read(r => r.Url("http://localhost:56090/api/Parts/GetBrands"))))
+                @Html.ValidationMessageFor(m => m.Brand)
+            </div>
+            <div class="form-group col-md-6">
+                @Html.LabelFor(m => m.Model)
+                @Html.EditorFor(m => m.Model, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.Model)
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(m => m.CpuSocket)
+                @(Html.Kendo().DropDownListFor(m => m.CpuSocket.Id)
+                    .HtmlAttributes(new { @class = "form-control" })
+                    .OptionLabel("Choose")
+                    .DataValueField("id")
+                    .DataTextField("name")
+                .DataSource(d => d.Read(r => r.Url("http://localhost:56090/api/Parts/GetCpuSockets"))))
+                @Html.ValidationMessageFor(m => m.CpuSocket)
+            </div>
+            <div class="form-group col-md-6">
+                @Html.LabelFor(m => m.RamType)
+                @(Html.Kendo().DropDownListFor(m => m.RamType.Id)
+                    .HtmlAttributes(new { @class = "form-control" })
+                    .OptionLabel("Choose")
+                    .DataValueField("id")
+                    .DataTextField("name")
+                .DataSource(d => d.Read(r => r.Url("http://localhost:56090/api/Parts/GetRamTypes"))))
+                @Html.ValidationMessageFor(m => m.RamType)
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(m => m.PhysicalCores)
+                @Html.EditorFor(m => m.PhysicalCores, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.PhysicalCores)
+            </div>
+            <div class="form-group col-md-6">
+                @Html.LabelFor(m => m.LogicalCores)
+                @Html.EditorFor(m => m.LogicalCores, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.LogicalCores)
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(m => m.Frequency)
+                @Html.EditorFor(m => m.Frequency, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.Frequency)
+            </div>
+            <div class="form-group col-md-6">
+                @Html.LabelFor(m => m.TurboBoostFrequency)
+                @Html.EditorFor(m => m.TurboBoostFrequency, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.TurboBoostFrequency)
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(m => m.Cache)
+                @Html.EditorFor(m => m.Cache, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.Cache)
+            </div>
+            <div class="form-group col-md-6">
+                @Html.LabelFor(m => m.Price)
+                @Html.EditorFor(m => m.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.Price)
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(m => m.IntegratedGraphics)
+                @Html.EditorFor(m => m.IntegratedGraphics, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.IntegratedGraphics)
+            </div>
+            <div class="form-group col-md-4">
+                @Html.LabelFor(m => m.WarrantyPeriod)
+                @Html.EditorFor(m => m.WarrantyPeriod, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.WarrantyPeriod)
+            </div>
+        </div>
+
+        <div class="form-row">
+
+            <div class="form-group col-md-6">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+
+            <div class="form-group col-md-6">
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </div>
+
+    </div>
+}
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
