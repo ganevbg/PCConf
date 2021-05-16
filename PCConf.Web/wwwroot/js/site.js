@@ -18,7 +18,7 @@ function filterData(e) {
     return data;
 }
 
-function cascadeCases() {
+function cascadeCases(e) {
 
     let mbDropDown = $("#motherborads").data("kendoDropDownList");
     let vcDropDown = $("#videocards").data("kendoDropDownList");
@@ -46,7 +46,8 @@ function cascadeCases() {
                 }
             });
 
-    } else {
+    }
+    else {
         casesDropDown.value("");
         casesDropDown.enable(false);
     }
@@ -110,25 +111,32 @@ function getPathToActionMethod(action, controller, area, useArea) {
     return controller + "/" + action + "/";
 }
 
-function onSelectPartDropDown(e) {
+function onClosePartDropDown() {
+    let dropDowns = getDropDowns();
+    let textBox = $("#configurationPrice").data("kendoNumericTextBox");
 
-    if (e.dataItem.id != "" && e.sender.dataItem().id == "") {
-        addToConfigurationPrice(e.dataItem.price);
-    } else if (e.dataItem.id != "" && e.sender.dataItem().id != "") {
-        removeFromConfigurationPrice(e.sender.dataItem().price);
-        addToConfigurationPrice(e.dataItem.price);
-    } else if (e.dataItem.id == "") {
-        removeFromConfigurationPrice(e.sender.dataItem().price)
+    let total = 0;
+    for (var i = 0; i < dropDowns.length; i++) {
+        total += dropDowns[i].dataItem().price && dropDowns[i].dataItem().price != "" ? parseFloat(dropDowns[i].dataItem().price) : 0
     }
-        
+
+    textBox.value(parseFloat(total).toFixed(2));
+
 }
 
-function addToConfigurationPrice(value) {
-    let textBox = $("#configurationPrice").data("kendoNumericTextBox");
-    textBox.value(parseFloat(parseFloat(textBox.value()) + value).toFixed(2))
-}
+function getDropDowns() {
 
-function removeFromConfigurationPrice(value) {
-    let textBox = $("#configurationPrice").data("kendoNumericTextBox");
-    textBox.value(parseFloat(parseFloat(textBox.value()) - value).toFixed(2))
+    let dropDownDOMelements = $(".k-dropdown");
+    let dropDowns = [];
+
+    dropDownDOMelements.each(function (ddl) {
+        let currentAriaOwnsAttribute = $(this)[0].attributes[7].nodeValue;
+        let currentDropDownListName = currentAriaOwnsAttribute.substring(0, currentAriaOwnsAttribute.length - 8);
+
+        let currentDropDownList = $('#' + currentDropDownListName).data("kendoDropDownList");
+        dropDowns.push(currentDropDownList);
+
+    });
+
+    return dropDowns;
 }

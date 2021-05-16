@@ -62,8 +62,8 @@
                         },
                         new Brand
                         {
-                            Name = "SATA",
-                            Logo = "sata.svg"
+                            Name = "ADATA",
+                            Logo = "adata.svg"
                         },
                         new Brand
                         {
@@ -363,7 +363,7 @@
             if (!context.Rams.Any())
             {
                 var kingston = context.Brands.First(x => x.Name.Equals("Kingston"));
-                var sata = context.Brands.First(x => x.Name.Equals("SATA"));
+                var adata = context.Brands.First(x => x.Name.Equals("ADATA"));
                 var ddr3 = context.RamTypes.First(x => x.Name.Equals("DDR3"));
                 var ddr4 = context.RamTypes.First(x => x.Name.Equals("DDR4"));
 
@@ -395,7 +395,7 @@
                     },
                     new Ram
                     {
-                        Brand = sata,
+                        Brand = adata,
                         Model = "rt5",
                         Size = 32,
                         ModulesCount = 4,
@@ -407,7 +407,7 @@
                     },
                     new Ram
                     {
-                        Brand = sata,
+                        Brand = adata,
                         Model = "rt66",
                         Size = 64,
                         ModulesCount = 2,

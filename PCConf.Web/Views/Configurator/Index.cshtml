@@ -24,10 +24,7 @@
                 .OptionLabelTemplate("Choose")
                 .TemplateId("dropDownTempalteId")
                 .ValueTemplateId("dropDownTempalteId")
-                .Events(e =>
-                {
-                    e.Select("onSelectPartDropDown");
-                })
+                .Events(e => e.Close("onClosePartDropDown"))
                 .DataSource(d => d.Read(r => r.Url("http://localhost:56090/api/Parts/GetProcessors"))))
             </div>
 
@@ -45,8 +42,8 @@
                 .TemplateId("dropDownTempalteId")
                 .ValueTemplateId("dropDownTempalteId")
                 .Events(e => {
-                    e.Select("onSelectPartDropDown");
                     e.Cascade("cascadeCases");
+                    e.Close("onClosePartDropDown");
                 })
                 .DataSource(d => d.Read(r => r.Action("GetMotherBoards", "Configurator").Data("filterData")).ServerFiltering(true)))
             </div>
@@ -66,7 +63,7 @@
                 .OptionLabelTemplate("Choose")
                 .TemplateId("ramTemplateId")
                 .ValueTemplateId("ramTemplateId")
-                .Events(e => e.Select("onSelectPartDropDown"))
+                .Events(e => e.Close("onClosePartDropDown"))
                 .DataSource(d => d.Read(r => r.Action("GetRams", "Configurator").Data("filterData")).ServerFiltering(true)))
             </div>
 
@@ -78,9 +75,9 @@
                 .Name("videocards")
                 .DataValueField("id")
                 .DataTextField("graphicsProcessor")
+                .Events(e => e.Close("onClosePartDropDown"))
                 .Events(e =>
                 {
-                    e.Select("onSelectPartDropDown");
                     e.Cascade("cascadeCases");
                 })
                 .OptionLabelTemplate("Choose")
@@ -100,9 +97,9 @@
                 .DataValueField("id")
                 .DataTextField("model")
                 .OptionLabelTemplate("Choose")
-                .TemplateId("dropDownTempalteId")
-                .ValueTemplateId("dropDownTempalteId")
-                .Events(e => e.Select("onSelectPartDropDown"))
+                .TemplateId("driveTemplateId")
+                .ValueTemplateId("driveTemplateId")
+                .Events(e => e.Close("onClosePartDropDown"))
             .DataSource(d => d.Read(r => r.Url("http://localhost:56090/api/Parts/GetDrives"))))
             </div>
 
@@ -117,7 +114,7 @@
                 .OptionLabelTemplate("Choose")
                 .TemplateId("dropDownTempalteId")
                 .ValueTemplateId("dropDownTempalteId")
-                .Events(e => e.Select("onSelectPartDropDown"))
+                .Events(e => e.Close("onClosePartDropDown"))
             .DataSource(d => d.Read(r => r.Action("GetCases", "Configurator"))))
             </div>
 
@@ -131,8 +128,7 @@
                 .DataTextField("model")
                 .OptionLabelTemplate("Choose")
                 .TemplateId("dropDownTempalteId")
-                .ValueTemplateId("dropDownTempalteId")
-                .Events(e => e.Select("onSelectPartDropDown"))
+                .ValueTemplateId("dropDownTempalteId").Events(e => e.Close("onClosePartDropDown"))
             .DataSource(d => d.Read(r => r.Url("http://localhost:56090/api/Parts/GetPowerSuplies"))))
             </div>
         </div>
@@ -149,12 +145,21 @@
     </span>
 </script>
 
+<script id="driveTemplateId" type="text/x-kendo-template">
+    <span class="k-state-default" style="display:inline-block;" >
+        <img style="width:30px; height:30px;" src="#: kendo.format('images/{0}', data.brand.logo)#"></img>
+    </span>
+    <span>
+         #: data.type.name #  #: data.brand.name # #: data.model # #: data.capacity # GB  Price: #: kendo.toString(price, "c") #
+    </span>
+</script>
+
 <script id="ramTemplateId" type="text/x-kendo-template">
     <span class="k-state-default" style="display:inline-block;" >
         <img style="width:30px; height:30px;" src="#: kendo.format('images/{0}', data.brand.logo)#"></img>
     </span>
     <span>
-         #: data.brand.name # #: data.model # #: data.size # GB  Price: #: kendo.toString(price, "c") #
+       #: data.brand.name # #: data.model # #: data.size # GB  Price: #: kendo.toString(price, "c") #
     </span>
 </script>
 
