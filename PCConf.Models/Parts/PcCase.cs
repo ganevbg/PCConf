@@ -15,7 +15,5 @@
         public int MaxVideoCardSize { get; set; }
 
         public double Weight { get; set; }
-
-        public int WarrantyPeriod { get; set; }
     }
 }

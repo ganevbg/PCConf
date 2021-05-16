@@ -13,7 +13,5 @@
         public int SingleModuleSize { get; set; }
 
         public int Frequency { get; set; }
-
-        public int WarrantyPeriod { get; set; }
     }
 }

@@ -17,7 +17,5 @@
         public int MaxRamCapacity { get; set; }
 
         public bool DualChannelSupport { get; set; }
-
-        public int WarrantyPeriod { get; set; }
     }
 }

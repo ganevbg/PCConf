@@ -187,6 +187,7 @@
                                 LogicalCores = 4,
                                 IntegratedGraphics = true,
                                 RamType = context.RamTypes.First(x => x.Name.Equals("DDR4")),
+                                Price = GetRandomDecimal(100, 800),
                                 WarrantyPeriod = 24
                             },
                             new Processor
@@ -201,6 +202,7 @@
                                 LogicalCores = 6,
                                 IntegratedGraphics = true,
                                 RamType = context.RamTypes.First(x => x.Name.Equals("DDR4")),
+                                Price = GetRandomDecimal(100, 800),
                                 WarrantyPeriod = 24
                             },
                             new Processor
@@ -215,6 +217,7 @@
                                 LogicalCores = 8,
                                 IntegratedGraphics = true,
                                 RamType = context.RamTypes.First(x => x.Name.Equals("DDR4")),
+                                Price = GetRandomDecimal(100, 800),
                                 WarrantyPeriod = 24
                             },
                             new Processor
@@ -229,6 +232,7 @@
                                 LogicalCores = 4,
                                 IntegratedGraphics = true,
                                 RamType = context.RamTypes.First(x => x.Name.Equals("DDR4")),
+                                Price = GetRandomDecimal(100, 800),
                                 WarrantyPeriod = 24
                             },
                             new Processor
@@ -243,9 +247,10 @@
                                 LogicalCores = 8,
                                 IntegratedGraphics = true,
                                 RamType = context.RamTypes.First(x => x.Name.Equals("DDR4")),
+                                Price = GetRandomDecimal(100, 800),
                                 WarrantyPeriod = 24
                             }
-                    });
+                    });;
 
                 context.SaveChanges();
             }
@@ -291,6 +296,7 @@
                             RamSlotsCount = 4,
                             RamType = context.RamTypes.First(x => x.Name.Equals("DDR3")),
                             Format = context.Formats.First(x => x.Name.Equals("ATX")),
+                            Price = GetRandomDecimal(100, 800),
                             WarrantyPeriod = 36
                         },
                         new MotherBoard
@@ -304,6 +310,7 @@
                             RamSlotsCount = 4,
                             RamType = context.RamTypes.First(x => x.Name.Equals("DDR4")),
                             Format = context.Formats.First(x => x.Name.Equals("Mini ITX")),
+                            Price = GetRandomDecimal(100, 800),
                             WarrantyPeriod = 36
                         },
                         new MotherBoard
@@ -317,6 +324,7 @@
                             RamSlotsCount = 4,
                             RamType = context.RamTypes.First(x => x.Name.Equals("DDR3")),
                             Format = context.Formats.First(x => x.Name.Equals("Mini ITX")),
+                            Price = GetRandomDecimal(100, 800),
                             WarrantyPeriod = 32
                         },
                         new MotherBoard
@@ -330,6 +338,7 @@
                             RamSlotsCount = 2,
                             RamType = context.RamTypes.First(x => x.Name.Equals("DDR4")),
                             Format = context.Formats.First(x => x.Name.Equals("Micro ATX")),
+                            Price = GetRandomDecimal(100, 800),
                             WarrantyPeriod = 24
                         },
                         new MotherBoard
@@ -343,6 +352,7 @@
                             RamSlotsCount = 4,
                             RamType = context.RamTypes.First(x => x.Name.Equals("DDR4")),
                             Format = context.Formats.First(x => x.Name.Equals("ATX")),
+                            Price = GetRandomDecimal(100, 800),
                             WarrantyPeriod = 36
                         }
                     });
@@ -368,6 +378,7 @@
                         SingleModuleSize = 8,
                         Type = ddr3,
                         Frequency = 1666,
+                        Price = GetRandomDecimal(100, 800),
                         WarrantyPeriod = 24
                     },
                     new Ram
@@ -379,6 +390,7 @@
                         SingleModuleSize = 1,
                         Type = ddr3,
                         Frequency = 1888,
+                        Price = GetRandomDecimal(100, 800),
                         WarrantyPeriod = 24
                     },
                     new Ram
@@ -390,6 +402,7 @@
                         SingleModuleSize = 8,
                         Type = ddr4,
                         Frequency = 2400,
+                        Price = GetRandomDecimal(100, 800),
                         WarrantyPeriod = 24
                     },
                     new Ram
@@ -400,7 +413,9 @@
                         ModulesCount = 2,
                         SingleModuleSize = 32,
                         Type = ddr4,
+                        Price = GetRandomDecimal(100, 800),
                         Frequency = 3200,
+                        WarrantyPeriod = 12
                     },
                     new Ram
                     {
@@ -411,6 +426,7 @@
                         SingleModuleSize = 8,
                         Type = ddr4,
                         Frequency = 3200,
+                        Price = GetRandomDecimal(100, 800),
                         WarrantyPeriod = 24
                     }
                     });
@@ -466,6 +482,7 @@
                             VideoRamType = context.VideoRamTypes.First(x => x.Name.Equals("GDDR5")),
                             Length = 280,
                             Interface = context.VideoCardInterfaces.First(x => x.Name.Equals("PCI-Express-16")),
+                            Price = GetRandomDecimal(100, 800),
                             WarrantyPeriod = 24,
                         },
                         new VideoCard
@@ -478,6 +495,7 @@
                             VideoRamType = context.VideoRamTypes.First(x => x.Name.Equals("GDDR5x")),
                             Length = 320,
                             Interface = context.VideoCardInterfaces.First(x => x.Name.Equals("PCI-Express-16")),
+                            Price = GetRandomDecimal(100, 800),
                             WarrantyPeriod = 24
                         },
                         new VideoCard
@@ -490,6 +508,7 @@
                             VideoRamType = context.VideoRamTypes.First(x => x.Name.Equals("GDDR6")),
                             Length = 340,
                             Interface = context.VideoCardInterfaces.First(x => x.Name.Equals("PCI-Express-32")),
+                            Price = GetRandomDecimal(100, 800),
                             WarrantyPeriod = 24
                         },
                         new VideoCard
@@ -502,6 +521,7 @@
                             VideoRamType = context.VideoRamTypes.First(x => x.Name.Equals("GDDR6")),
                             Length = 300,
                             Interface = context.VideoCardInterfaces.First(x => x.Name.Equals("PCI-Express")),
+                            Price = GetRandomDecimal(100, 800),
                             WarrantyPeriod = 24
                         },
                         new VideoCard
@@ -514,8 +534,9 @@
                             VideoRamType = context.VideoRamTypes.First(x => x.Name.Equals("GDDR5")),
                             Length = 250,
                             Interface = context.VideoCardInterfaces.First(x => x.Name.Equals("PCI-Express")),
+                            Price = GetRandomDecimal(100, 800),
                             WarrantyPeriod = 24
-                        },
+                        }
                     });
 
                 context.SaveChanges();
@@ -557,36 +578,46 @@
                             Brand = cm,
                             Model = "a1",
                             Certificate = context.Certificates.First(x => x.Name.Equals("80+ gold")),
-                            Output = 700
+                            Price = GetRandomDecimal(100, 800),
+                            Output = 700,
+                            WarrantyPeriod = 24
                         },
-                         new PowerSuply
+                        new PowerSuply
                         {
                             Brand = cm,
                             Model = "a2",
                             Certificate = context.Certificates.First(x => x.Name.Equals("80+ silver")),
-                            Output = 600
+                            Price = GetRandomDecimal(100, 800),
+                            Output = 600,
+                            WarrantyPeriod = 24
                         },
-                          new PowerSuply
+                        new PowerSuply
                         {
                             Brand = cm,
                             Model = "a3",
                             Certificate = context.Certificates.First(x => x.Name.Equals("80+ bronze")),
-                            Output = 500
+                            Price = GetRandomDecimal(100, 800),
+                            Output = 500,
+                            WarrantyPeriod = 24
                         },
-                           new PowerSuply
+                        new PowerSuply
                         {
                             Brand = nzxt,
                             Model = "kraken 3",
                             Certificate = context.Certificates.First(x => x.Name.Equals("80+ gold")),
-                            Output = 700
+                            Price = GetRandomDecimal(100, 800),
+                            Output = 700,
+                            WarrantyPeriod = 24
                         },
-                            new PowerSuply
+                        new PowerSuply
                         {
                             Brand = nzxt,
                             Model = "kraken",
                             Certificate = context.Certificates.First(x => x.Name.Equals("80+ bronze")),
-                            Output = 500
-                        },
+                            Price = GetRandomDecimal(100, 800),
+                            Output = 500,
+                            WarrantyPeriod = 24
+                        }
                     });
 
                 context.SaveChanges();
@@ -611,6 +642,7 @@
                             MaxVideoCardSize = 300,
                             Weight = 4,
                             SidePanel = "glass",
+                            Price = GetRandomDecimal(100, 800),
                             WarrantyPeriod = 12
                         },
                         new PcCase
@@ -621,6 +653,7 @@
                             MaxVideoCardSize = 330,
                             Weight = 4.5,
                             SidePanel = "glass",
+                            Price = GetRandomDecimal(100, 800),
                             WarrantyPeriod = 12
                         },
                         new PcCase
@@ -631,6 +664,7 @@
                             MaxVideoCardSize = 350,
                             Weight = 5,
                             SidePanel = "glass",
+                            Price = GetRandomDecimal(100, 800),
                             WarrantyPeriod = 12
                         },
                         new PcCase
@@ -641,6 +675,7 @@
                             MaxVideoCardSize = 400,
                             Weight = 6,
                             SidePanel = "metal",
+                            Price = GetRandomDecimal(100, 800),
                             WarrantyPeriod = 12
                         },
                         new PcCase
@@ -651,6 +686,7 @@
                             MaxVideoCardSize = 280,
                             Weight = 2,
                             SidePanel = "metal",
+                            Price = GetRandomDecimal(100, 800),
                             WarrantyPeriod = 12
                         }
                     });
@@ -752,17 +788,17 @@
                             Brand = kingston,
                             Model = "abc 55",
                             Capacity = 1024,
-                            Price = 56,
                             Type = context.StorageDriveTypes.First(x => x.Name.Equals("HDD")),
                             ReadSpeed = 50,
-                            WriteSpeed = 80
+                            WriteSpeed = 80,
+                            Price = GetRandomDecimal(100, 800)
                         },
                         new StorageDrive
                         {
                             Brand = sg,
                             Model = "sg br5",
                             Capacity = 512,
-                            Price = 154.99m,
+                            Price = GetRandomDecimal(100, 800),
                             Type = context.StorageDriveTypes.First(x => x.Name.Equals("SSD")),
                             ReadSpeed = 250,
                             WriteSpeed = 380
@@ -772,7 +808,7 @@
                             Brand = kingston,
                             Model = "rtt 55",
                             Capacity = 256,
-                            Price = 89.45m,
+                            Price = GetRandomDecimal(100, 800),
                             Type = context.StorageDriveTypes.First(x => x.Name.Equals("SSD")),
                             ReadSpeed = 250,
                             WriteSpeed = 287
@@ -782,7 +818,7 @@
                             Brand = sg,
                             Model = "gb55",
                             Capacity = 2048,
-                            Price = 250.89m,
+                            Price = GetRandomDecimal(100, 800),
                             Type = context.StorageDriveTypes.First(x => x.Name.Equals("M.2")),
                             ReadSpeed = 800,
                             WriteSpeed = 970
@@ -792,7 +828,7 @@
                             Brand = sg,
                             Model = "trt 55",
                             Capacity = 1024,
-                            Price = 132.22m,
+                            Price = GetRandomDecimal(100, 800),
                             Type = context.StorageDriveTypes.First(x => x.Name.Equals("HDD")),
                             ReadSpeed = 120,
                             WriteSpeed = 140
@@ -801,6 +837,14 @@
 
                 context.SaveChanges();
             }
+        }
+
+        private static decimal GetRandomDecimal(int min, int max)
+        {
+            var random = new Random();
+            var next = random.NextDouble();
+
+            return Convert.ToDecimal(min + (next * (max - min)));
         }
     }
 }

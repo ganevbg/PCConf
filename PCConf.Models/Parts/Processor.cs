@@ -19,7 +19,5 @@
         public RamType RamType { get; set; }
 
         public bool IntegratedGraphics { get; set; }
-
-        public int WarrantyPeriod { get; set; }
     }
 }

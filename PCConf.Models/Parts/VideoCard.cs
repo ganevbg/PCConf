@@ -15,7 +15,5 @@
         public Interface Interface { get; set; }
 
         public int Length { get; set; }
-
-        public int WarrantyPeriod { get; set; }
     }
 }
