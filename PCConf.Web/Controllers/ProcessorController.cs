@@ -1,17 +1,23 @@
 ﻿namespace PCConf.Web.Controllers
 {
+    using AutoMapper;
     using Microsoft.AspNetCore.Mvc;
     using PCConf.Domain.Services;
     using PCConf.Models.Parts;
+    using PCConf.Web.Models;
     using System;
     using System.Threading.Tasks;
 
     public class ProcessorController : Controller
     {
+        private readonly IMapper _mapper;
         private readonly IProcessorService _processorService;
 
-        public ProcessorController(IProcessorService processorService)
+        public ProcessorController(
+            IMapper mapper,
+            IProcessorService processorService)
         {
+            _mapper = mapper;
             _processorService = processorService;
         }
 
@@ -31,17 +37,17 @@
 
         public async Task<IActionResult> Upsert(Guid? id)
         {
-            var item = new Processor();
+            var item = new ProcessorUpsertModel();
             if (id.HasValue)
             {
-                item = await _processorService.Get(id.Value);
+                item = _mapper.Map<ProcessorUpsertModel>(await _processorService.Get(id.Value));
             }
 
             return View(item);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Upsert(Processor item)
+        public async Task<IActionResult> Upsert(ProcessorUpsertModel item)
         {
             if (!ModelState.IsValid)
             {
@@ -54,7 +60,7 @@
         }
 
         [HttpPost]
-        public ActionResult Delete( Guid id)
+        public ActionResult Delete(Guid id)
         {
             _processorService.Delete(id);
 
