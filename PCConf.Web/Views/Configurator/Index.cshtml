@@ -1,8 +1,21 @@
 ﻿<div class="container">
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            @Html.Label("Processor")
-            @(Html.Kendo().DropDownList()
+
+    <div class="text-center">
+        @Html.Label("Configuration total price")
+        <div class="form-group col-md-12">
+            @(Html.Kendo().CurrencyTextBox()
+                .Name("configurationPrice")
+                .HtmlAttributes(new { @class = "form-control", @readonly = "readonly" })
+                .Value(0)
+                .Spinners(false))
+        </div>
+
+    </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @Html.Label("Processor")
+                @(Html.Kendo().DropDownList()
                 .HtmlAttributes(new { @class = "form-control" })
                 .OptionLabel("Choose")
                 .Name("processors")
@@ -11,12 +24,16 @@
                 .OptionLabelTemplate("Choose")
                 .TemplateId("dropDownTempalteId")
                 .ValueTemplateId("dropDownTempalteId")
+                .Events(e =>
+                {
+                    e.Select("onSelectPartDropDown");
+                })
                 .DataSource(d => d.Read(r => r.Url("http://localhost:56090/api/Parts/GetProcessors"))))
-        </div>
+            </div>
 
-        <div class="form-group col-md-6">
-            @Html.Label("Motherborad")
-            @(Html.Kendo().DropDownList()
+            <div class="form-group col-md-6">
+                @Html.Label("Motherborad")
+                @(Html.Kendo().DropDownList()
                 .HtmlAttributes(new { @class = "form-control" })
                 .OptionLabel("Choose")
                 .Name("motherborads")
@@ -27,14 +44,18 @@
                 .OptionLabelTemplate("Choose")
                 .TemplateId("dropDownTempalteId")
                 .ValueTemplateId("dropDownTempalteId")
+                .Events(e => {
+                    e.Select("onSelectPartDropDown");
+                    e.Cascade("cascadeCases");
+                })
                 .DataSource(d => d.Read(r => r.Action("GetMotherBoards", "Configurator").Data("filterData")).ServerFiltering(true)))
+            </div>
         </div>
-    </div>
 
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            @Html.Label("RAM")
-            @(Html.Kendo().DropDownList()
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                @Html.Label("RAM")
+                @(Html.Kendo().DropDownList()
                 .HtmlAttributes(new { @class = "form-control" })
                 .OptionLabel("Choose")
                 .Name("rams")
@@ -45,29 +66,34 @@
                 .OptionLabelTemplate("Choose")
                 .TemplateId("ramTemplateId")
                 .ValueTemplateId("ramTemplateId")
+                .Events(e => e.Select("onSelectPartDropDown"))
                 .DataSource(d => d.Read(r => r.Action("GetRams", "Configurator").Data("filterData")).ServerFiltering(true)))
-        </div>
+            </div>
 
-        <div class="form-group col-md-6">
-            @Html.Label("Video card")
-            @(Html.Kendo().DropDownList()
+            <div class="form-group col-md-6">
+                @Html.Label("Video card")
+                @(Html.Kendo().DropDownList()
                 .HtmlAttributes(new { @class = "form-control" })
                 .OptionLabel("Choose")
                 .Name("videocards")
                 .DataValueField("id")
                 .DataTextField("graphicsProcessor")
-                .Events(e => e.Cascade("cascadeCases"))
+                .Events(e =>
+                {
+                    e.Select("onSelectPartDropDown");
+                    e.Cascade("cascadeCases");
+                })
                 .OptionLabelTemplate("Choose")
                 .TemplateId("gpuTemplateId")
                 .ValueTemplateId("gpuTemplateId")
                 .DataSource(d => d.Read(r => r.Url("http://localhost:56090/api/Parts/GetVideCards"))))
+            </div>
         </div>
-    </div>
 
-    <div class="form-row">
-        <div class="form-group col-md-4">
-            @Html.Label("Disk Drive")
-            @(Html.Kendo().DropDownList()
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                @Html.Label("Disk Drive")
+                @(Html.Kendo().DropDownList()
                 .HtmlAttributes(new { @class = "form-control" })
                 .OptionLabel("Choose")
                 .Name("drives")
@@ -76,12 +102,13 @@
                 .OptionLabelTemplate("Choose")
                 .TemplateId("dropDownTempalteId")
                 .ValueTemplateId("dropDownTempalteId")
+                .Events(e => e.Select("onSelectPartDropDown"))
             .DataSource(d => d.Read(r => r.Url("http://localhost:56090/api/Parts/GetDrives"))))
-        </div>
+            </div>
 
-        <div class="form-group col-md-4">
-            @Html.Label("Case")
-            @(Html.Kendo().DropDownList()
+            <div class="form-group col-md-4">
+                @Html.Label("Case")
+                @(Html.Kendo().DropDownList()
                 .HtmlAttributes(new { @class = "form-control" })
                 .OptionLabel("Choose")
                 .Name("cases")
@@ -90,12 +117,13 @@
                 .OptionLabelTemplate("Choose")
                 .TemplateId("dropDownTempalteId")
                 .ValueTemplateId("dropDownTempalteId")
+                .Events(e => e.Select("onSelectPartDropDown"))
             .DataSource(d => d.Read(r => r.Action("GetCases", "Configurator"))))
-        </div>
+            </div>
 
-        <div class="form-group col-md-4">
-            @Html.Label("Power suply")
-            @(Html.Kendo().DropDownList()
+            <div class="form-group col-md-4">
+                @Html.Label("Power suply")
+                @(Html.Kendo().DropDownList()
                 .HtmlAttributes(new { @class = "form-control" })
                 .OptionLabel("Choose")
                 .Name("powersuplies")
@@ -104,10 +132,11 @@
                 .OptionLabelTemplate("Choose")
                 .TemplateId("dropDownTempalteId")
                 .ValueTemplateId("dropDownTempalteId")
+                .Events(e => e.Select("onSelectPartDropDown"))
             .DataSource(d => d.Read(r => r.Url("http://localhost:56090/api/Parts/GetPowerSuplies"))))
+            </div>
         </div>
     </div>
-</div>
 
 
 <script id="dropDownTempalteId" type="text/x-kendo-template">

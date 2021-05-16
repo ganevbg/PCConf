@@ -4,10 +4,10 @@
 // Write your JavaScript code.
 
 function filterData(e) {
-    var data = {};
+    let data = {};
     if (e.filter.filters && e.filter.filters.length > 0) {
-        for (var i = 0; i < e.filter.filters.length; i++) {
-            var fieldName = e.filter.filters[i].field.toUpperCase() === "name".toUpperCase()
+        for (let i = 0; i < e.filter.filters.length; i++) {
+            let fieldName = e.filter.filters[i].field.toUpperCase() === "name".toUpperCase()
                 || e.filter.filters[i].field.toUpperCase() === "fullname".toUpperCase()
                 ? "text"
                 : e.filter.filters[i].field;
@@ -16,13 +16,13 @@ function filterData(e) {
     }
 
     return data;
-};
+}
 
 function cascadeCases() {
 
-    var mbDropDown = $("#motherborads").data("kendoDropDownList");
-    var vcDropDown = $("#videocards").data("kendoDropDownList");
-    var casesDropDown = $("#cases").data("kendoDropDownList");
+    let mbDropDown = $("#motherborads").data("kendoDropDownList");
+    let vcDropDown = $("#videocards").data("kendoDropDownList");
+    let casesDropDown = $("#cases").data("kendoDropDownList");
 
     if (mbDropDown.value() && vcDropDown.value()) {
         casesDropDown.enable(true);
@@ -58,8 +58,8 @@ function requestOptional(action, controller, optional) {
         optional = {};
     }
 
-    var isPost = typeof optional.type !== 'undefined' && optional.type !== null && ["POST", "DELETE"].indexOf(optional.type.toUpperCase()) > -1;
-    var ajaxSettings = {
+    let isPost = typeof optional.type !== 'undefined' && optional.type !== null && ["POST", "DELETE"].indexOf(optional.type.toUpperCase()) > -1;
+    let ajaxSettings = {
         data: isPost
             ? JSON.stringify(optional.data)
             : optional.data,
@@ -108,4 +108,27 @@ function getPathToActionMethod(action, controller, area, useArea) {
     }
 
     return controller + "/" + action + "/";
-};
+}
+
+function onSelectPartDropDown(e) {
+
+    if (e.dataItem.id != "" && e.sender.dataItem().id == "") {
+        addToConfigurationPrice(e.dataItem.price);
+    } else if (e.dataItem.id != "" && e.sender.dataItem().id != "") {
+        removeFromConfigurationPrice(e.sender.dataItem().price);
+        addToConfigurationPrice(e.dataItem.price);
+    } else if (e.dataItem.id == "") {
+        removeFromConfigurationPrice(e.sender.dataItem().price)
+    }
+        
+}
+
+function addToConfigurationPrice(value) {
+    let textBox = $("#configurationPrice").data("kendoNumericTextBox");
+    textBox.value(parseFloat(parseFloat(textBox.value()) + value).toFixed(2))
+}
+
+function removeFromConfigurationPrice(value) {
+    let textBox = $("#configurationPrice").data("kendoNumericTextBox");
+    textBox.value(parseFloat(parseFloat(textBox.value()) - value).toFixed(2))
+}
